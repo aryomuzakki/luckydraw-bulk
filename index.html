@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Lucky Draw - Spin Wheel</title>
+
+  <meta name="title" content="Lucky Draw - Spin Wheel" />
+  <meta name="description" content="Lucky Draw - Spin Wheel" />
+
+  <!-- metatags -->
+
+  <!-- Open Graph / Facebook -->
+  <!-- <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://spinwheel.kemaskreasi.com/" />
+  <meta property="og:title" content="Lucky Draw - Spin Wheel" />
+  <meta property="og:description"
+    content="Easy to use spinner. Enter names and spin the wheel to pick a random winner." />
+  <meta property="og:image" content="https://spinwheel.kemaskreasi.com/assets/lucky-draw-meta-image.jpg" />
+  <meta property="og:image:width" content="720" />
+  <meta property="og:image:height" content="353" /> -->
+
+  <!-- Twitter -->
+  <!-- <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://spinwheel.kemaskreasi.com/" />
+  <meta property="twitter:title" content="Lucky Draw - Spin Wheel" />
+  <meta property="twitter:description"
+    content="Easy to use spinner. Enter names and spin the wheel to pick a random winner." />
+  <meta property="twitter:image" content="https://spinwheel.kemaskreasi.com/assets/lucky-draw-meta-image.jpg" /> -->
+
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png" />
+  <link rel="manifest" href="./site.webmanifest" />
+  <link rel="mask-icon" href="./safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff" />
+
+  <script>
+    // register service worker
+    // window.addEventListener("load", () => {
+    //   if ("serviceWorker" in navigator) {
+    //     navigator.serviceWorker.register("sw.js", { scope: "./" }).catch(err => {
+    //       console.warn("Error registering service worker: ", err);
+    //     })
+    //   }
+    // });
+  </script>
+
+  <!-- Font Open Sans -->
+  <link rel="stylesheet" href="./assets/css/font-open-sans.css" />
+
+  <!-- bootstrap -->
+  <link href="./assets/css/dist/bootstrap-5.3.3.min.css" rel="stylesheet" />
+
+  <!-- animate.css -->
+  <link rel="stylesheet" href="./assets/css/dist/animate.min.css" />
+
+  <!-- <link rel="stylesheet" href="./assets/css/typo/typo.css" /> -->
+
+  <link rel="stylesheet" href="./assets/css/style.css" />
+</head>
+
+<body>
+  <div id="confettiContainer">
+    <canvas id="confetti"></canvas>
+    <button class="close-confetti-btn btn">Close confetti</button>
+    <audio preload="auto" src="./assets/audio/drum-roll.mp3" loop id="drumRoll" class="invisible opacity-0"></audio>
+    <audio preload="auto" src="./assets/audio/success-fanfare-n-applause-whistle.mp3" id="fanfareApplause" class="invisible opacity-0"></audio>
+  </div>
+
+  <header>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-dark fixed-top dark-glass-bg navbar-expand-xxl">
+      <div class="container-fluid">
+        <!-- <a class="navbar-brand" href="./index.html" style="padding: 0;">
+        </a> -->
+        <div class="event-logo position-absolute d-flex align-items-center"
+          style="height: 60.78px; top: 0; left: 50%; transform: translate(-50%, 0);">
+          <button class="luckydraw-start-btn text-uppercase">
+            <span class="text">Mulai</span>
+          </button>
+          <!-- <img src="./assets/logo-temu-responden-tahun-2022.png" alt="" height="46px" class="me-3"> -->
+        </div>
+        <div class="navbar-toggler-wrapper">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav my-2 my-lg-0">
+            <li class="nav-item d-flex align-items-center me-1" style="height: 40px;">
+              <img src="./assets/img/custom-event-logo.png" alt="" height="40px" width="auto" class=""
+                style="max-width: 200px; height: 100%; max-height: 40px; padding: 5px 4px 3px 4px;">
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#settings">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+                  <g fill="currentColor">
+                    <path
+                      d="M8 4.754a3.246 3.246 0 1 0 0 6.492a3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0a2.246 2.246 0 0 1-4.492 0" />
+                    <path
+                      d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z" />
+                  </g>
+                </svg>
+              </a>
+            </li>
+            <!-- <li class="nav-item">
+              <a class="nav-link" href="#dataset">
+                Edit Data
+              </a>
+            </li> -->
+            <li class="nav-item">
+              <a class="nav-link" href="#upload-data">
+                Upload Data
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#upload-prize">
+                Upload Prize
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#winner-list">
+                Result
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#participant-list">
+                Entries
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-danger fw-semibold" tabindex="0" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Delete
+              </a>
+              <ul class="dropdown-menu dark-glass-bg">
+                <li>
+                  <a class="dropdown-item nav-link" href="#reset">
+                    Delete Result
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item nav-link" href="#delete">
+                    Delete All
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="position-absolute d-flex align-items-center" style="height: 60.78px; top: 0; right: 0.75rem;">
+          <ul class="navbar-nav">
+            <li class="ms-auto nav-item">
+              <a class="nav-link" href="#fullscreen">
+                Fullscreen
+              </a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="bg" style="background-image: url('./assets/img/custom-background.jpg'), var(--bg-default-gradient);">
+
+      <div class="content-container w-100 p-3">
+        <div class="content-bg rounded-4 overflow-hidden p-4 dark-glass-bg position-relative z-1 h-100">
+
+          <div
+            class="list-area overflow-y-hidden overflow-x-auto d-flex justify-content-center align-items-center gap-1 h-100">
+
+            <ol id="listContainer"
+              class="d-flex list-unstyled m-0 flex-column flex-wrap justify-content-start h-100 w-100"
+              style="column-gap: 1rem;">
+
+            </ol>
+
+          </div>
+
+          <div id="prizesContainer"></div>
+
+        </div>
+      </div>
+
+      <div class="settings dark-glass-bg z-1" style=" top: 60.78px">
+        <div class="overflow-auto p-3 h-100">
+          <div class="d-flex justify-content-end">
+            <button type="button" id="closeSettingsBtn" class="btn btn-close btn-close-white" title="Close"></button>
+          </div>
+          <form id="settingsForm" inert="inert">
+            <div class="mb-3">
+              <label for="eventTitle" class="form-label">Title</label>
+              <input type="text" class="form-control form-control-sm" id="eventTitle">
+            </div>
+            <div class="mb-3">
+              <p>Logo</p>
+              <div class="position-relative my-2 d-flex gap-3" style="height: 46px;">
+                <img loading="lazy" src="./assets/img/custom-event-logo.png" alt="event logo" id="logoImagePreview"
+                  width="100%" height="100%" style="object-fit: contain;">
+              </div>
+              <label for="logoImage" class="form-label">New Logo</label>
+              <div class="input-group">
+                <!-- <input type="file" class="form-control form-control-sm" id="logoImage" aria-describedby="uploadNewLogo"
+                    aria-label="Upload"> -->
+                <input class="form-control form-control-sm" type="file" accept="image/*" id="logoImage">
+                <!-- <button class="btn btn-primary" type="button" id="uploadNewLogo">Button</button> -->
+              </div>
+            </div>
+            <div class="mb-3">
+              <p>Background</p>
+              <div class="position-relative my-2 d-flex gap-3" style="height: 150px;">
+                <img loading="lazy" src="./assets/img/custom-background.jpg" alt="event background"
+                  id="backgroundImagePreview" width="100%" height="100%" style="object-fit: contain;">
+              </div>
+              <label for="backgroundImage" class="form-label">New Background</label>
+              <input class="form-control form-control-sm" type="file" accept="image/*" id="backgroundImage">
+            </div>
+            <div class="mb-3">
+              <label for="randomingDuration" class="form-label col-8">Randoming Duration</label>
+              <div class="col">
+                <input class="form-control form-control-sm" type="number" step="0.05" min="0" name="randomingDuration"
+                  id="randomingDuration" disabled>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="textFontSize" class="form-label col-8">Text Font Size</label>
+              <div class="col">
+                <input class="form-control form-control-sm" type="number" step="1" min="1" name="textFontSize"
+                  id="textFontSize">
+              </div>
+            </div>
+            <div class="mb-3">
+              <p class="">Use Percentage</p>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="usePercentage" disabled>
+                <label class="form-check-label" for="usePercentage" style="position: relative; top: -2px;">Yes</label>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center gap-4 py-4">
+              <button type="button" id="defaultSettingsBtn" class="btn btn-info">Default</button>
+              <button type="button" id="cancelSettingsBtn" class="btn btn-secondary">Cancel</button>
+              <button type="submit" id="saveSettingsBtn" class="btn btn-primary px-4">
+                Save
+                <span class="d-inline-block ms-1"
+                  style="height: 24px; width: 0; transform: translateY(-1px); transition: .15s;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                      d="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8A8 8 0 0 1 12 20Z" opacity=".5" />
+                    <path fill="currentColor" d="M20 12h2A10 10 0 0 0 12 2V4A8 8 0 0 1 20 12Z">
+                      <animateTransform attributeName="transform" dur="1s" from="0 12 12" repeatCount="indefinite"
+                        to="360 12 12" type="rotate" />
+                    </path>
+                  </svg>
+                </span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="dataset dark-glass-bg z-1" style=" top: 60.78px">
+        <div class="overflow-auto p-3 h-100">
+          <div class="d-flex justify-content-end">
+            <button type="button" id="closeDatasetBtn" class="btn btn-close btn-close-white" title="Close"></button>
+          </div>
+          <form id="datasetForm" inert="inert">
+            <div class="mb-3">
+              <label for="entries" class="form-label">Entries</label>
+              <textarea class="form-control" id="entries" rows="10"></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="entry" class="form-label">1.</label>
+              <input class="form-control" type="text" name="text">
+              <input class="form-control" type="number" name="amount">
+            </div>
+            <div class="mb-3">
+              <label for="entry" class="form-label">2.</label>
+              <input class="form-control" type="text" name="text">
+              <input class="form-control" type="number" name="amount">
+            </div>
+            <div class="d-flex justify-content-center gap-4">
+              <button type="button" id="defaultDatasetBtn" class="btn btn-info">Default</button>
+              <button type="button" id="cancelDatasetBtn" class="btn btn-secondary">Cancel</button>
+              <button type="submit" id="saveDatasetBtn" class="btn btn-primary px-4">
+                Save
+                <span class="d-inline-block ms-1"
+                  style="height: 24px; width: 0; transform: translateY(-1px); transition: .15s;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                      d="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8A8 8 0 0 1 12 20Z" opacity=".5" />
+                    <path fill="currentColor" d="M20 12h2A10 10 0 0 0 12 2V4A8 8 0 0 1 20 12Z">
+                      <animateTransform attributeName="transform" dur="1s" from="0 12 12" repeatCount="indefinite"
+                        to="360 12 12" type="rotate" />
+                    </path>
+                  </svg>
+                </span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- bootstrap -->
+  <script src="./assets/js/dist/bootstrap-5.3.3.bundle.min.js"></script>
+
+  <!-- SheetJS -->
+  <script src="./assets/js/dist/xlsx-v0.19.1.full.min.js"></script>
+
+  <!-- dayjs -->
+  <script src="./assets/js/dist/dayjs-v1.11.13.min.js"></script>
+  <script src="./assets/js/dist/dayjs-locale-id-v1.11.13.js"></script>
+
+  <!-- sweet alert 2 -->
+  <script src="./assets/js/dist/sweetalert2@11.js"></script>
+  <!-- confetti -->
+  <script src="./assets/js/confetti.js"></script>
+  <!-- constants -->
+  <script src="./assets/js/constants.js"></script>
+  <!-- utilities -->
+  <script src="./assets/js/utils.js"></script>
+  <!-- export winners -->
+  <script src="./assets/js/exportWinners.js"></script>
+  <!-- init -->
+  <script src="./assets/js/script.js"></script>
+  <!-- web configuration -->
+  <script src="./assets/js/settings.js"></script>
+</body>
+
+</html>
