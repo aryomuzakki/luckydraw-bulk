@@ -134,14 +134,14 @@ hr {
 .nav-link {
   --bs-nav-link-padding-x: 0.75rem;
   --bs-navbar-nav-link-padding-x: 0.75rem;
-  --bs-nav-link-color: rgba(255, 255, 255, 0.8);
+  --bs-nav-link-color: rgba(0, 0, 0, 0.8);
   border-radius: 3px;
 }
 
 .navbar-toggler:focus,
 .nav-link:focus {
-  background-color: #11192840;
-  color: #ffffff;
+  background-color: #f6f9ff40;
+  color: #000000;
   text-decoration: none;
   box-shadow: none;
   outline: auto;
@@ -149,8 +149,8 @@ hr {
 
 .navbar-toggler:hover:not(:disabled),
 .nav-link:hover {
-  background-color: #11192880;
-  color: #ffffff;
+  background-color: #f6f9fe80;
+  color: #000000;
   text-decoration: none;
   outline: none;
 }
@@ -437,9 +437,6 @@ table tr td>span.sticky-col {
 
 /*  */
 
-.content-container {
-  height: calc(100vh - 60.79px);
-}
 
 /* From Uiverse.io by KSAplay */
 .luckydraw-start-btn {
@@ -525,6 +522,15 @@ table tr td>span.sticky-col {
   }
 }
 
+/* list style */
+.content-container {
+  height: calc(100vh - 60.79px);
+}
+
+#listContainer {
+  column-gap: 1rem;
+}
+
 #listContainer .winner-item:last-child {
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
@@ -561,6 +567,43 @@ table tr td>span.sticky-col {
 
 .winner-prize {
   font-size: var(--winner-prize-font-size);
-  font-weight: 300;
+  font-weight: 400;
   white-space: nowrap;
+}
+
+/* end of list style */
+
+/* theme */
+
+/* style-1 */
+
+.style-1 .dark-glass-bg {
+  color: rgba(0, 0, 0, 0.9);
+}
+.style-1 .dark-glass-bg::before {
+  background-color: #04539e20;
+}
+
+.style-1 .content-bg {
+  color: inherit;
+}
+
+.style-1 .content-bg::before {
+  content: none;
+}
+
+.style-1 #listContainer {
+  column-gap: 1rem;
+  row-gap: 2px;
+}
+
+.style-1 .winner-item {
+  border-radius: 6px;
+  background: #04539e;
+  color: #fff;
+  width: auto;
+}
+
+.style-1 .winner-item+.winner-item {
+  border-radius: 6px;
 }

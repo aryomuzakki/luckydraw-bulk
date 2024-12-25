@@ -270,6 +270,9 @@
   textFontSizeInput.addEventListener("change", (ev) => {
     console.log(ev.target)
     console.log(ev.target.value)
+     // set font size
+     document.getElementById("listContainer").style.setProperty("--winner-item-font-size", ev.target.value + "px");
+
   })
 
   saveSettingsBtn.addEventListener("click", (ev) => {
@@ -394,7 +397,9 @@
       document.getElementsByTagName("title")[0].textContent = eventTitle;
       // apply logo 
       logoImageSrc = `./assets/img/custom-event-logo.png?r=${new Date().getTime()}`;
-      document.getElementsByClassName("event-logo")[0].children[0].src = logoImageSrc;
+      // set to ui
+      // document.getElementsByClassName("event-logo")[0].children[0].src = logoImageSrc;
+      document.getElementsByClassName("event-logo-img")[0].src = logoImageSrc;
       // apply background
       backgroundImageSrc = `./assets/img/custom-background.jpg?r=${new Date().getTime()}`;
       document.getElementsByClassName("bg")[0].style.backgroundImage = `url(${backgroundImageSrc}), var(--bg-default-gradient)`;
@@ -402,20 +407,19 @@
       // set randoming duration
       // document.getElementsByClassName("lucky-draw-container")[0].style.setProperty("--transition-duration", randomingDuration);
 
-      // set font size
+      // set font size in css
       document.getElementById("listContainer").style.setProperty("--winner-item-font-size", textFontSize);
 
       // set options
-      setLS("options", {
+      setLS(LS_PREFIX + "options", {
         textFontSize,
         usePercentage,
+        randomingDuration,
       });
 
       // redraw canvas
       // window.initLuckyWheel();
     }
-
-    console.log(randomingDuration);
 
     if (useDefaultImg) {
       await copyImg();
@@ -428,16 +432,16 @@
         // apply non image input
         document.getElementsByTagName("title")[0].textContent = eventTitle;
 
-        console.log(randomingDuration);
         // document.getElementsByClassName("lucky-draw-container")[0].style.setProperty("--transition-duration", randomingDuration);
 
-        // set font size
+        // set font size in css
         document.getElementById("listContainer").style.setProperty("--winner-item-font-size", textFontSize);
 
         // set options
-        setLS("options", {
+        setLS(LS_PREFIX + "options", {
           textFontSize,
           usePercentage,
+          randomingDuration,
         });
 
         // redraw canvas
@@ -483,7 +487,6 @@
     // get randoming duration
     // randomingDuration
     // randomingDuration ??= getComputedStyle(document.getElementsByClassName("lucky-draw-container")[0]).getPropertyValue("--transition-duration");
-    randomingDuration = "6";
     settingsForm.querySelector("#randomingDuration").value = 6;
 
     // remove added var (instead will use root var value)
@@ -546,15 +549,21 @@
     // get randoming duration
     // // randomingDuration
     // randomingDuration ??= getComputedStyle(document.getElementsByClassName("lucky-draw-container")[0]).getPropertyValue("--transition-duration");
-    randomingDuration = "6";
-    settingsForm.querySelector("#randomingDuration").value = randomingDuration.replace("s", "");
 
+    // load from params or from localstorage, or from default
+    const options = getLS(LS_PREFIX + "options");
+
+    // use ls or default value
+    randomingDuration ??= options?.randomingDuration || "6";
+    settingsForm.querySelector("#randomingDuration").value = randomingDuration?.replace("s", "");
+
+    // use ls or default value
     // set text font size value
-    textFontSize = "14";
+    textFontSize ??= options?.textFontSize || "14";
     settingsForm.querySelector("#textFontSize").value = textFontSize?.replace("px", "");
+    // set font size in css
+    document.getElementById("listContainer").style.setProperty("--winner-item-font-size", textFontSize);
 
-    // load from localstorage or from params, or from default
-    const options = getLS("options");
     // usePercentage
     document.getElementById("usePercentage").checked = options?.usePercentage || usePercentage || defaultSettingsOpts.usePercentage;
 
@@ -642,7 +651,7 @@
 
     datasetEntries = ev.target.textarea.value;
 
-    let currentDatalist = localStorage.getItem("currentDatalist");
+    let currentDatalist = localStorage.getItem(LS_PREFIX + "currentDatalist");
 
     if (currentDatalist !== null || typeof currentDatalist === "string") {
       currentDatalist = JSON.parse(currentDatalist);
