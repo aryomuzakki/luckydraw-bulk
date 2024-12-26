@@ -594,14 +594,14 @@ table tr td>span.sticky-col {
 
 .style-1 #listContainer {
   column-gap: 1rem;
-  row-gap: 2px;
+  row-gap: 4px;
 }
 
 .style-1 .winner-item {
   border-radius: 6px;
   background: #04539e;
   color: #fff;
-  width: auto;
+  width: 32%;
 }
 
 .style-1 .winner-item+.winner-item {
