@@ -270,8 +270,8 @@
   textFontSizeInput.addEventListener("change", (ev) => {
     console.log(ev.target)
     console.log(ev.target.value)
-     // set font size
-     document.getElementById("listContainer").style.setProperty("--winner-item-font-size", ev.target.value + "px");
+    // set font size
+    document.getElementById("listContainer").style.setProperty("--winner-item-font-size", ev.target.value + "px");
 
   })
 
@@ -479,11 +479,11 @@
     // title
     settingsForm.querySelector("#eventTitle").value = "Lucky Draw - Spin Wheel";
     // logoImage
-    const defaultLogo = "./assets/img/event-logo.png";
-    document.getElementById("logoImagePreview").src = "./assets/img/event-logo.png";
+    const defaultLogo = `./assets/img/event-logo.png?r=${new Date().getTime()}`;
+    document.getElementById("logoImagePreview").src = `./assets/img/event-logo.png?r=${new Date().getTime()}`;
     // backgroundImage
-    const defaultBackground = "./assets/img/background.jpg";
-    document.getElementById("backgroundImagePreview").src = "./assets/img/background.jpg";
+    const defaultBackground = `./assets/img/background.jpg?r=${new Date().getTime()}`;
+    document.getElementById("backgroundImagePreview").src = `./assets/img/background.jpg?r=${new Date().getTime()}`;
     // get randoming duration
     // randomingDuration
     // randomingDuration ??= getComputedStyle(document.getElementsByClassName("lucky-draw-container")[0]).getPropertyValue("--transition-duration");
@@ -541,10 +541,10 @@
     eventTitle ??= document.getElementsByTagName("title")[0].textContent;
     settingsForm.querySelector("#eventTitle").value = eventTitle || document.getElementsByTagName("title")[0].textContent;
     // logoImage
-    logoImageSrc ??= "./assets/img/custom-event-logo.png";
+    logoImageSrc ??= `./assets/img/custom-event-logo.png?r=${new Date().getTime()}`;
     document.getElementById("logoImagePreview").src = logoImageSrc;
     // backgroundImage
-    backgroundImageSrc ??= "./assets/img/custom-background.jpg";
+    backgroundImageSrc ??= `./assets/img/custom-background.jpg?r=${new Date().getTime()}`;
     document.getElementById("backgroundImagePreview").src = backgroundImageSrc;
     // get randoming duration
     // // randomingDuration
