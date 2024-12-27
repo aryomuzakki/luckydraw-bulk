@@ -580,6 +580,7 @@ table tr td>span.sticky-col {
 .style-1 .dark-glass-bg {
   color: rgba(0, 0, 0, 0.9);
 }
+
 .style-1 .dark-glass-bg::before {
   background-color: #04539e20;
 }
@@ -606,4 +607,21 @@ table tr td>span.sticky-col {
 
 .style-1 .winner-item+.winner-item {
   border-radius: 6px;
+}
+
+.oneDataStyleClass.style-1 .winner-item {
+  padding: .5rem 2rem;
+  font-size: 84px;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+}
+
+.oneDataStyleClass.style-1 #listContainer {
+  justify-content: center !important;
+}
+
+.oneDataStyleClass.style-1 .winner-prize-num {
+  display: none;
 }

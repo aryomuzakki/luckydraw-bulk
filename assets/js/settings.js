@@ -293,12 +293,13 @@
     saveSettingsBtn.childNodes[0].textContent = "Saving";
     saveSettingsBtn.childNodes[1].style.width = "24px";
 
-    let eventTitle, logoImageSrc, backgroundImageSrc, randomingDuration, usePercentage;
+    let eventTitle, logoImageSrc, backgroundImageSrc, randomingDuration, usePercentage, useOneDataStyle;
 
     eventTitle = ev.target.eventTitle.value;
     randomingDuration = ev.target.randomingDuration.value + "s";
     textFontSize = ev.target.textFontSize.value + "px";
     usePercentage = ev.target.usePercentage.checked;
+    useOneDataStyle = ev.target.useOneDataStyle.checked;
 
     const saveImg = async () => {
 
@@ -414,6 +415,7 @@
       setLS(LS_PREFIX + "options", {
         textFontSize,
         usePercentage,
+        useOneDataStyle,
         randomingDuration,
       });
 
@@ -441,6 +443,7 @@
         setLS(LS_PREFIX + "options", {
           textFontSize,
           usePercentage,
+          useOneDataStyle,
           randomingDuration,
         });
 
@@ -466,9 +469,10 @@
     title: "Lucky Draw - Spin Wheel",
     logo: "./assets/img/event-logo.png",
     background: "./assets/img/background.jpg",
-    randomingDuration: 6,
+    randomingDuration: 5,
     textFontSize: 14,
     usePercentage: false,
+    useOneDataStyle: false,
   }
 
   /**
@@ -487,7 +491,7 @@
     // get randoming duration
     // randomingDuration
     // randomingDuration ??= getComputedStyle(document.getElementsByClassName("lucky-draw-container")[0]).getPropertyValue("--transition-duration");
-    settingsForm.querySelector("#randomingDuration").value = 6;
+    settingsForm.querySelector("#randomingDuration").value = 5;
 
     // remove added var (instead will use root var value)
     document.getElementById("listContainer").style.removeProperty("--winner-item-font-size");
@@ -495,6 +499,11 @@
 
     // usePercentage
     document.getElementById("usePercentage").checked = false;
+
+    // use one data style
+    document.getElementById("useOneDataStyle").checked = false;
+    // toggle class for one data style
+    document.body.classList.remove("oneDataStyleClass");
 
     // clean up blobs and image files
     revokeBlobs();
@@ -536,6 +545,7 @@
     randomingDuration,
     textFontSize,
     usePercentage,
+    useOneDataStyle,
   } = {}) => {
     // title
     eventTitle ??= document.getElementsByTagName("title")[0].textContent;
@@ -554,7 +564,7 @@
     const options = getLS(LS_PREFIX + "options");
 
     // use ls or default value
-    randomingDuration ??= options?.randomingDuration || "6";
+    randomingDuration ??= options?.randomingDuration || "5";
     settingsForm.querySelector("#randomingDuration").value = randomingDuration?.replace("s", "");
 
     // use ls or default value
@@ -566,6 +576,15 @@
 
     // usePercentage
     document.getElementById("usePercentage").checked = options?.usePercentage || usePercentage || defaultSettingsOpts.usePercentage;
+
+    // use one data style
+    document.getElementById("useOneDataStyle").checked = options?.useOneDataStyle || useOneDataStyle || defaultSettingsOpts.useOneDataStyle;
+    // toggle class for one data style
+    if (options?.useOneDataStyle || useOneDataStyle || defaultSettingsOpts.useOneDataStyle) {
+      document.body.classList.add("oneDataStyleClass")
+    } else {
+      document.body.classList.remove("oneDataStyleClass")
+    }
 
     // clean up blobs and image files
     revokeBlobs();

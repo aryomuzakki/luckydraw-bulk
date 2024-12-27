@@ -86,6 +86,7 @@
 
   // luckywheel options
   let USE_PERCENTAGE = false;
+  let USE_ONE_DATA_STYLE = false;
   let UPDATE_PERCENTAGE_FOLLOWING_AMOUNT = false;
 
   // menu
@@ -918,6 +919,7 @@
 
     if (options) {
       USE_PERCENTAGE = options?.usePercentage || false;
+      USE_ONE_DATA_STYLE = options?.useOneDataStyle || false;
       UPDATE_PERCENTAGE_FOLLOWING_AMOUNT = options?.updatePercentageFollowingAmount || false;
     }
 
